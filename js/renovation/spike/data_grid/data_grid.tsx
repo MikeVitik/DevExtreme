@@ -23,8 +23,9 @@ import '../../../ui/data_grid/ui.data_grid';
 import { Widget } from '../../ui/common/widget';
 import { DataGridPagingProps } from './paging-props';
 import { DataGridComponent } from './datagrid_component';
-import DataGridViews from './data_grid_views';
-import { GridInstance } from './common/types.d';
+import { DataGridViews } from './data_grid_views';
+import { GridInstance } from './common/types';
+import { HeaderPanelViewInstance } from '../view-extenders/header_panel_view';
 
 gridCore.registerModulesOrder([
   'stateStoring',
@@ -56,6 +57,19 @@ gridCore.registerModulesOrder([
   'export',
   'gridView']);
 
+function overrideModuleView(name, viewType) {
+  const { modules } = gridCore as any;
+  modules.forEach((m) => {
+    if (m.views && m.views[name]) {
+      console.log('Override view:', name);
+      // eslint-disable-next-line no-param-reassign
+      m.views[name] = viewType;
+    }
+  });
+}
+
+overrideModuleView('headerPanel', HeaderPanelViewInstance);
+
 export const viewFunction = ({
   gridInstance,
   props,
@@ -71,7 +85,7 @@ export const viewFunction = ({
 const pagingDefault = DataGridPagingProps;
 
 @Component({ defaultOptionRules: null, jQuery: { register: true }, view: viewFunction })
-export default class DataGrid extends JSXComponent(DataGridProps) {
+export class DataGrid extends JSXComponent(DataGridProps) {
   componentHolder: { componentInstance?: GridInstance } = { componentInstance: undefined };
 
   // @Ref() widgetRef!: Widget;
