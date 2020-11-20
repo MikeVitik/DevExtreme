@@ -3,13 +3,14 @@ import {
 } from 'devextreme-generator/component_declaration/common';
 import { DataGridProps } from '../../ui/data_grid/props';
 import { DataGridPagerView } from './data_grid_pager_view';
-import { DataGridView, DataGridViewProps } from './common/types.d';
+import { DataGridView, DataGridViewProps } from './common/types';
 import { DataGridViewWrapper } from './data_grid_view_wrapper';
+import { HeaderPanelView } from '../view-extenders/header_panel_view';
 
 const GRIDBASE_CONTAINER_CLASS = 'dx-gridbase-container';
 
 const VIEW_NAMES = ['columnsSeparatorView', 'blockSeparatorView', 'trackerView', 'headerPanel', 'columnHeadersView', 'rowsView', 'footerView', 'columnChooserView', 'filterPanelView', 'pagerView', 'draggingHeaderView', 'contextMenuView', 'errorView', 'headerFilterView', 'filterBuilderView'];
-const VIEWCOMPONENTS = { pagerView: DataGridPagerView };
+const VIEWCOMPONENTS = { pagerView: DataGridPagerView, headerPanel: HeaderPanelView };
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const viewFunction = ({

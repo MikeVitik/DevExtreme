@@ -24,7 +24,8 @@ import { Widget } from '../../ui/common/widget';
 import { DataGridPagingProps } from './paging-props';
 import { DataGridComponent } from './datagrid_component';
 import DataGridViews from './data_grid_views';
-import { GridInstance } from './common/types.d';
+import { GridInstance } from './common/types';
+import { RenovatedViewInstance } from '../view-extenders/view_instance';
 
 gridCore.registerModulesOrder([
   'stateStoring',
@@ -55,6 +56,19 @@ gridCore.registerModulesOrder([
   'columnFixing',
   'export',
   'gridView']);
+// TODO Vitik move to module api
+function overrideModuleView(name, viewInstanceType) {
+  const { modules } = gridCore as any;
+  modules.forEach((m) => {
+    if (m.views && m.views[name]) {
+      console.log('Override view:', name);
+      // eslint-disable-next-line no-param-reassign
+      m.views[name] = viewInstanceType;
+    }
+  });
+}
+
+overrideModuleView('headerPanel', RenovatedViewInstance);
 
 export const viewFunction = ({
   gridInstance,

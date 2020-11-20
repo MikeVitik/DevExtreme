@@ -18,6 +18,6 @@ export type DataGridView = {
 
 @ComponentBindings()
 export class DataGridViewProps {
-  @OneWay() gridInstance: GridInstance;
-  @OneWay() gridProps: DataGridProps;
+  @OneWay() gridInstance!: GridInstance;
+  @OneWay() gridProps!: DataGridProps;
 }
